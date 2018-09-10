@@ -5,3 +5,5 @@ ui_particle_unity3d/Assembly-CSharp.csproj
 ui_particle_unity3d/Assembly-CSharp-Editor.csproj
 ui_particle_unity3d/.vs/
 ui_particle_unity3d/obj/
+ui_particle_unity3d/ui_particle_unity3d.Editor.csproj
+ui_particle_unity3d/ui_particle_unity3d.csproj
