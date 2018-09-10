@@ -4,8 +4,10 @@ using UnityEngine.EventSystems;
 
 public class JoysticController : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerDownHandler
 {
-    public RectTransform _background;
-    public RectTransform _handle;
+    [SerializeField] RectTransform _background;
+    [SerializeField] RectTransform _handle;
+    [SerializeField] ParticleSystem _particle;
+    //[SerializeField] ScreenWorldPosition _screenWorld;
 
     Vector2 _joystickCenter;
     PointerEventData _eventData;
@@ -22,7 +24,7 @@ public class JoysticController : MonoBehaviour, IDragHandler, IPointerUpHandler,
         var inputVector = (direction.magnitude > radius)
             ? direction.normalized
             : direction / (radius);
-        _handle.anchoredPosition = inputVector * radius;
+        _handle.anchoredPosition = inputVector * radius;        
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -31,12 +33,14 @@ public class JoysticController : MonoBehaviour, IDragHandler, IPointerUpHandler,
         {
             _eventData = null;
             _handle.position = _joystickCenter;
+            _particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         _eventData = eventData;
+        _particle.Play(true);
         OnDrag(eventData);
     }
 
